@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>genie</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bl:#1a8cff;--ink:#0f1b2d;--mu:#6b7a8c;--ln:#e4eaf1;--ch:#f3f7fb;--ti:#eaf4ff;--tr:#dce4ee;--bg:#fff;--gr:#dcebff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8eef7;--mu:#8fa0b5;--ln:#1e2a3b;--ch:#16202f;--ti:#12263f;--tr:#2a3850;--bg:#0b1220;--gr:#10233d;color-scheme:dark}}
+:root[data-theme="dark"]{--ink:#e8eef7;--mu:#8fa0b5;--ln:#1e2a3b;--ch:#16202f;--ti:#12263f;--tr:#2a3850;--bg:#0b1220;--gr:#10233d;color-scheme:dark}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px}
+a{color:inherit;text-decoration:none;cursor:pointer}button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
+svg{display:block;flex:none}
+#app{display:grid;grid-template-columns:240px minmax(0,1fr);grid-template-rows:80px minmax(0,1fr) 96px;height:100%}
+aside{grid-row:1/3;border-right:1px solid var(--ln);padding:24px 20px;display:flex;flex-direction:column;overflow:auto}
+.logo{font-weight:900;font-size:30px;color:var(--bl);margin:0 8px 28px;position:relative;width:max-content}
+.logo i{position:absolute;right:-12px;bottom:10px;width:8px;height:8px;border-radius:4px;background:var(--ink)}
+.nv{display:flex;align-items:center;gap:12px;height:48px;padding:0 12px;border-radius:12px;color:var(--mu);font-weight:500;font-size:16px;margin-bottom:4px}
+.nv.on{background:var(--ti);color:var(--bl);font-weight:700}
+.pl{margin-top:auto;padding:0 12px}.pl p{margin:0 0 12px;font-size:13px;color:var(--mu);font-weight:500}
+.pl div{display:flex;align-items:center;gap:14px;font-size:14px;font-weight:500;margin-bottom:12px}
+header{grid-column:2;display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.sb{display:flex;align-items:center;gap:12px;width:min(520px,100%);height:48px;padding:0 16px;border-radius:14px;background:var(--ch);color:var(--mu);border:1.5px solid transparent}
+.sb.f{background:var(--bg);border-color:var(--bl);color:var(--bl)}
+.sb input{flex:1;min-width:0;border:0;background:none;outline:0;font:inherit;color:var(--ink)}.sb.f input{font-weight:700}
+.sb input::placeholder{color:var(--mu)}
+.us{display:flex;align-items:center;gap:16px;font-weight:500}.av{width:40px;height:40px;border-radius:20px}
+main{grid-column:2;overflow:auto;padding:8px 48px 24px}
+h2{font-size:22px;font-weight:700;margin:0}.hd{display:flex;justify-content:space-between;align-items:center;margin:28px 0 16px}
+.hd a{color:var(--bl);font-weight:500;font-size:14px}
+.mu{color:var(--mu)}.sm{font-size:13px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{height:44px;padding:0 18px;border-radius:24px;background:var(--ch);font-weight:500;display:inline-flex;align-items:center}
+.chip.on{background:var(--ink);color:var(--bg)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}.tab{height:42px;padding:0 18px;border-radius:22px;background:var(--ch);color:var(--mu);font-weight:500;font-size:14px}
+.tab.on{background:var(--ink);color:var(--bg);font-weight:700}
+.pb{border-radius:50%;background:var(--bl);color:#fff;display:grid;place-items:center;flex:none}
+.cvf{width:100%;aspect-ratio:1}.cd b,.cd small{display:block}.cd b{font-weight:500;margin-top:10px}.cd small{color:var(--mu);font-size:13px;margin-top:2px}
+.grid{display:grid;gap:20px}
+.hero{border-radius:28px;background:linear-gradient(167deg,#1a8cff,#0b4fd6);color:#fff;padding:24px 36px;display:flex;justify-content:space-between;overflow:hidden;min-height:250px}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.2);border-radius:16px;padding:5px 14px;font-size:13px;font-weight:500}
+.hero h1{font-size:34px;font-weight:900;line-height:1.45;margin:10px 0 8px}
+.hero .bt{display:flex;gap:14px;margin-top:14px}.hero .bt button{height:42px;border-radius:22px}
+.hero .pl1{width:42px;background:#fff;color:var(--bl);display:grid;place-items:center}.hero .sv{border:1px solid rgba(255,255,255,.6);padding:0 20px;font-size:14px;font-weight:500}
+.hero .cs{display:flex;gap:16px;margin-right:-40px;align-items:center}.hero .cs div{width:180px;height:180px;border-radius:20px;flex:none}
+.rw{display:flex;align-items:center;gap:14px;padding:6px 0}.rw>.n{width:20px;color:var(--mu);font-size:14px}
+.rw .tt{flex:1;min-width:0}.rw .tt b{display:block;font-weight:500}.rw .tt small{color:var(--mu);font-size:13px}
+.rw .m{min-width:90px;color:var(--mu);font-size:13px}
+.two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px}
+.two2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px}
+.mood{border-radius:24px;height:150px;color:#fff;padding:0 22px 22px;display:flex;flex-direction:column;justify-content:flex-end}
+.mood b{font-size:26px;font-weight:900}.mood small{font-size:13px}
+.gen{border-radius:16px;height:84px;color:#fff;font-weight:700;font-size:17px;padding:0 16px 14px;display:flex;align-items:flex-end}
+.pop{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}.pop a{display:flex;gap:14px;height:42px;align-items:center;font-size:16px}.pop b{width:20px;color:var(--mu)}.pop b.t{color:var(--bl)}
+.liked{display:flex;align-items:center;gap:18px;background:var(--ch);border-radius:20px;padding:16px 24px}
+.liked .c{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;color:#fff;flex:none}
+.btn{background:var(--bl);color:#fff;border-radius:24px;height:44px;padding:0 20px;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+.flw{border:1.5px solid var(--bl);color:var(--bl);border-radius:22px;height:40px;padding:0 24px;font-weight:700;font-size:13px}
+footer{grid-column:1/3;border-top:1px solid var(--ln);background:var(--bg);display:grid;grid-template-columns:1fr minmax(0,560px) 1fr;align-items:center;padding:0 32px}
+.np{display:flex;align-items:center;gap:14px;cursor:pointer;min-width:0}.np b{display:block;font-size:15px}.np small{color:var(--mu);font-size:13px}
+.ct{display:flex;flex-direction:column;align-items:center;gap:6px}.ctr{display:flex;align-items:center;gap:28px;color:var(--ink)}
+.bar{display:flex;align-items:center;gap:12px;width:100%;font-size:12px;color:var(--mu)}
+.tk{flex:1;height:5px;border-radius:3px;background:var(--tr);position:relative}.tk i{position:absolute;inset:0 auto 0 0;background:var(--bl);border-radius:3px}
+.rt{display:flex;align-items:center;gap:16px;justify-content:flex-end;color:var(--ink)}.rt .tk{flex:none;width:100px}
+.blue{color:var(--bl)}.lk.on svg{fill:#ff4d7d;stroke:#ff4d7d}.lk{color:var(--mu)}
+#pl{position:fixed;inset:0;background:linear-gradient(var(--gr),var(--bg) 70%);z-index:5;display:none;overflow:auto;padding:env(safe-area-inset-top,0px) 48px 24px}
+#pl.open{display:block}
+.pw{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);gap:96px;align-items:center;min-height:calc(100% - 140px)}
+.pw .art{width:100%;aspect-ratio:1;border-radius:32px;max-width:420px;margin-left:20px}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes eq{0%,100%{height:4px}50%{height:16px}}@keyframes fl{50%{transform:translateY(-12px)}}@keyframes pulse{50%{transform:scale(1.03)}}
+main.go>*{animation:in .5s both}main.go>*:nth-child(2){animation-delay:.07s}main.go>*:nth-child(3){animation-delay:.14s}main.go>*:nth-child(4){animation-delay:.21s}main.go>*:nth-child(5){animation-delay:.28s}
+.cd,.mood,.gen,.chip,.tab,.pb,.nv,.liked{transition:transform .2s,box-shadow .2s,background .25s,color .25s}
+.cd:hover,.mood:hover,.gen:hover{transform:translateY(-5px)}.cd:hover .cvf{box-shadow:0 12px 26px rgba(15,27,45,.28)}.pb:hover{transform:scale(1.1)}.pb:active,.chip:active,.tab:active{transform:scale(.93)}.chip:hover,.tab:hover{filter:brightness(.96)}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:16px;margin-left:6px;vertical-align:middle}.eq i{width:3px;background:var(--bl);border-radius:2px;animation:eq .8s infinite}.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+.hero .cs div{animation:fl 4s ease-in-out infinite}.hero .cs div:nth-child(2){animation-delay:-1.3s}.hero .cs div:nth-child(3){animation-delay:-2.6s}
+.art.sp{animation:pulse 2.4s ease-in-out infinite}.tk{cursor:pointer}.tk i{transition:width .9s linear}
+.r1>div:last-child,.r2>div:first-child,.r3>div:first-child{display:none}.lbs{display:none}.lb1 .lbs,.lb2 .lbs{display:block}.lb1 .lbx,.lb2 .lbx{display:none}
+@media (max-width:900px){#app{grid-template-columns:72px 1fr}.logo,.pl,.nv span{display:none}aside{padding:16px 12px}.us b{display:none}
+.two,.two2,.pw{grid-template-columns:1fr;gap:24px}.hero .cs{display:none}main,header{padding-left:20px;padding-right:20px}.rt,.rw .m{display:none}footer{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div id="app">
+<aside><div class="logo">genie<i></i></div><nav id="nav"></nav><div class="pl" id="pls"></div></aside>
+<header><label class="sb" id="sb"><span id="sbi"></span><input id="q" placeholder="아티스트, 곡, 앨범, 플레이리스트 검색"><span id="mic"></span></label>
+<div class="us"><b style="font-weight:500">지민님</b><div class="av" style="background:linear-gradient(135deg,#1a8cff,#6c5ce7)"></div></div></header>
+<main id="v"></main><footer id="ft"></footer></div>
+<div id="pl"></div>
+<script>
+const G={blue:['#1a8cff','#6c5ce7'],navy:['#0f1b2d','#3b5bdb'],mint:['#2dd4a7','#1a8cff'],coral:['#ff8a5b','#ff4d7d'],violet:['#a78bfa','#ec4899'],sky:['#38bdf8','#0b4fd6'],sun:['#ffd166','#ff8a5b'],green:['#34d399','#065f46']};
+const I={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',explore:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',library:'<path d="M4 6h16M4 12h10M4 18h6"/>',mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',play:'<path d="M8 5v14l11-7z" fill="currentColor"/>',pause:'<path d="M8 5v14M16 5v14" stroke-width="3"/>',prev:'<path d="M6 5v14M19 5v14l-11-7z"/>',next:'<path d="M18 5v14M5 5v14l11-7z"/>',shuffle:'<path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/>',repeat:'<path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/>',queue:'<path d="M3 6h14M3 12h14M3 18h8M18 15v6M15 18h6"/>',volume:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>',close:'<path d="M5 5l14 14M19 5L5 19"/>',plus:'<path d="M12 5v14M5 12h14"/>'};
+const ic=(n,s=22,x='')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" ${x}>${I[n]}</svg>`;
+const bg=g=>`background:linear-gradient(135deg,${G[g][0]},${G[g][1]})`;
+const cv=(g,s,r)=>`<div style="${bg(g)};width:${s}px;height:${s}px;border-radius:${r}px;flex:none"></div>`;
+const D=228,tb={},fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');let pos=84,last='',cur={t:'새벽 세 시의 도시',a:'하린',g:'sky'},playing=false,liked=false,q='하린',sit=2,mood=-1;
+const pb=(s,t,a,g)=>`<button class="pb" data-tr="${t}|${a}|${g}" style="width:${s}px;height:${s}px" aria-label="재생">${ic('play',s*.5)}</button>`;
+const row=(i,g,t,a,ms,d,s=48,fs=15)=>`<div class="rw"><span class="n">${i}</span>${cv(g,s,s>40?8:6)}<div class="tt"><b style="font-size:${fs}px">${t}</b><small>${a}</small></div>${ms.map(m=>`<span class="m">${m}</span>`).join('')}<span class="m" style="min-width:40px">${d}</span>${pb(s>40?34:32,t,a,g)}</div>`;
+const card=(g,t,s,r=16)=>`<div class="cd"><div class="cvf" style="${bg(g)};border-radius:${r}px"></div><b>${t}</b><small>${s}</small></div>`;
+const hd=(t,l='전체보기')=>`<div class="hd"><h2>${t}</h2>${l?`<a>${l}</a>`:''}</div>`;
+const chips=(a,on)=>`<div class="chips">${a.map((x,i)=>`<button class="chip${i===on?' on':''}" data-chip="${i}">${x}</button>`).join('')}</div>`;
+const tabs=(a,g='')=>`<div class="tabs">${a.map((x,i)=>`<button class="tab${i===(tb[g]||0)?' on':''}" data-tab="${g}:${i}">${x}</button>`).join('')}</div>`;
+const S={
+home:()=>`<div class="hero"><div><span class="tag">지민님을 위한 오늘의 믹스</span><h1>퇴근길엔 잔잔한 인디팝<br>어때요?</h1><div style="font-size:14px">새벽 세 시의 도시 외 24곡 · 1시간 32분</div><div class="bt"><button class="pl1" data-tr="새벽 세 시의 도시|하린|sky">${ic('play',21)}</button><button class="sv">믹스 저장</button></div></div><div class="cs"><div style="${bg('sky')}"></div><div style="${bg('coral')}"></div><div style="${bg('sun')}"></div></div></div>
+${hd('이어 듣기')}<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">${[['blue','여름밤 산책','플레이리스트'],['coral','Rainy Mood','플레이리스트'],['mint','집중 모드','플레이리스트'],['sun','주말 드라이브','플레이리스트'],['violet','파란 우산','소담'],['navy','Late Bus','노을']].map(c=>card(...c)).join('')}</div>
+<div class="two"><div>${hd('오늘의 추천')}${[['violet','파란 우산','소담','취향 92%','3:12'],['navy','Late Bus','노을','취향 88%','4:01'],['sun','노을 지는 방','온도','취향 82%','3:35']].map((r,i)=>row(i+1,r[0],r[1],r[2],[r[3]],r[4],32,14)).join('')}</div>
+<div>${hd('차트 · 신곡','')}${tabs(['실시간 차트','신곡'],'ch')}<div style="margin-top:14px">${(tb.ch?[['mint','초록 버스','나무'],['coral','새벽 라디오','밤하늘'],['green','숲속 산책','추천'],['sky','도시의 밤','하린'],['sun','주말 오후','추천']]:[['blue','여름밤 산책','하린'],['violet','파란 우산','소담'],['navy','Late Bus','노을'],['sun','노을 지는 방','온도'],['mint','그 골목의 불빛','하린']]).map((r,i)=>`<div class="rw" style="padding:4px 0;font-size:12px"><b class="blue" style="width:16px">${i+1}</b>${cv(r[0],20,4)}<b style="flex:1;font-weight:500">${r[1]}</b><span class="mu">${r[2]}</span></div>`).join('')}</div></div></div>`,
+search:()=>`${hd('최근 검색어','모두 지우기').replace('margin:28px 0 16px','')}${chips(['하린','잔잔한 재즈','비 오는 날','러닝 BPM 160','소담'],-1).replace(/data-chip/g,'data-q')}
+<div class="hd" style="margin-top:44px"><h2>인기 검색어</h2><span class="mu sm">오전 9시 기준</span></div><div class="pop">${['여름밤 산책','파란 우산','새벽 세 시의 도시','Late Bus','노을 지는 방','첫눈 오는 날','그 골목의 불빛','도시의 밤','Rainy Mood','주말 드라이브'].map((t,i)=>`<a data-q="${t}"><b class="${i<3?'t':''}">${i+1}</b>${t}</a>`).join('')}</div>`,
+results:()=>`<div style="margin-top:6px">${tabs(['전체','곡','아티스트','앨범','플레이리스트'],'res')}</div><div class="two2 r${tb.res||0}"><div>${hd('곡')}${[['sky','새벽 세 시의 도시','도시의 밤','3:48'],['blue','여름밤 산책','여름 노트','3:20'],['mint','그 골목의 불빛','골목','4:02'],['coral','첫눈 오는 날','겨울 노트','3:30']].map((r,i)=>row(i+1,r[0],r[1],'하린',[r[2]],r[3])).join('')}</div>
+<div>${hd('아티스트','')}<div class="rw" style="gap:16px">${cv('blue',88,44)}<div class="tt"><b>하린</b><small>팔로워 12만</small></div><button class="flw">팔로우</button></div>${hd('앨범','')}<div style="display:flex;gap:20px;flex-wrap:wrap">${[['sky','도시의 밤','2025'],['blue','여름 노트','2024']].map(c=>`<div style="width:128px">${card(...c)}</div>`).join('')}</div></div></div>`,
+explore:()=>`${hd('지금 기분은 어때요?','')}<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${[['coral','신나는',136],['mint','잔잔한',210],['sky','집중',98],['violet','센치한',174]].map((m,i)=>`<button class="mood" data-mood="${i}" style="${bg(m[0])};text-align:left${mood===i?';outline:3px solid var(--ink)':''}"><b>${m[1]}</b><small>${m[2]}곡</small></button>`).join('')}</div>
+${hd('상황별','')}${chips(['출근길','운동','비 오는 날','드라이브','잠들기 전','공부'],sit)}
+<div class="two2"><div>${hd('장르','')}<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:12px">${[['navy','발라드'],['coral','힙합'],['green','인디'],['violet','R&B'],['blue','록'],['sun','재즈']].map(g=>`<div class="gen" style="${bg(g[0])}">${g[1]}</div>`).join('')}</div></div>
+<div>${hd('새로 발견')}${[['sun','노을 지는 방','온도','취향 82%','3:35'],['green','초록 버스','나무','취향 79%','3:10'],['coral','새벽 라디오','밤하늘','취향 77%','4:20']].map((r,i)=>row(i+1,r[0],r[1],r[2],[r[3]],r[4])).join('')}</div></div>`,
+library:()=>`<div class="lb${tb.lib||0}"><div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><h1 style="font-size:32px;font-weight:900;margin:0">보관함</h1><button class="btn">${ic('plus',18)}새 플레이리스트</button></div>
+<div style="margin:18px 0 24px">${tabs(['플레이리스트','좋아요한 곡','최근 재생'],'lib')}</div>
+<div class="lbx"><div class="liked"><div class="c" style="${bg('coral')}">${ic('heart',28,'fill="none"')}</div><div class="tt" style="flex:1"><b style="font-weight:500">좋아요한 곡</b><div class="mu sm">128곡 · 최근 추가: 파란 우산</div></div>${pb(44,'파란 우산','소담','violet')}</div>
+${hd('내 플레이리스트')}<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">${[['blue','출근길 아침','32곡'],['navy','새벽 감성','45곡'],['mint','공부할 때','58곡'],['coral','운동 BPM','27곡'],['violet','비 오는 날','39곡']].map(c=>card(...c)).join('')}</div>
+${hd('추천 플레이리스트')}<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">${[['sky','지민님의 새벽'],['sun','주말 오후'],['green','숲속 산책']].map(c=>`<div class="rw" style="gap:16px">${cv(c[0],80,12)}<div class="tt"><b>${c[1]}</b><small>추천</small></div></div>`).join('')}</div></div><div class="lbs">${[['sky','새벽 세 시의 도시','하린','3:48'],['violet','파란 우산','소담','3:12'],['sun','노을 지는 방','온도','3:35'],['navy','Late Bus','노을','4:01']].map((r,i)=>row(i+1,r[0],r[1],r[2],[],r[3])).join('')}</div></div>`
+};
+const route=()=>{const h=location.hash.slice(1)||'home';return S[h]?h:'home'};
+function bar(){const w=playing?'pause':'play';return `<div class="np" data-open>${cv(cur.g,56,10)}<div><b>${cur.t}${playing?'<span class="eq"><i></i><i></i><i></i></span>':''}</b><small>${cur.a}</small></div><button class="lk${liked?' on':''}" data-like style="margin-left:36px" aria-label="좋아요">${ic('heart')}</button></div>
+<div class="ct"><div class="ctr">${ic('shuffle')}${ic('prev',26)}<button class="pb" data-play style="width:44px;height:44px" aria-label="재생/일시정지">${ic(w,22)}</button>${ic('next',26)}<span class="blue">${ic('repeat')}</span></div><div class="bar"><span class="pt">${fmt(pos)}</span><div class="tk" data-seek><i class="pf" style="width:${pos/D*100}%"></i></div>3:48</div></div>
+<div class="rt">${ic('queue')}${ic('volume')}<div class="tk"><i style="width:60%"></i></div></div>`}
+function player(){const w=playing?'pause':'play';return `<button data-close aria-label="닫기" style="position:absolute;left:48px;top:calc(27px + env(safe-area-inset-top,0px))">${ic('close',26)}</button><div class="mu sm" style="text-align:center;padding-top:30px">재생 중 · 오늘의 믹스</div>
+<div class="pw"><div><div class="art${playing?' sp':''}" style="${bg(cur.g)}"></div><div style="display:flex;justify-content:space-between;align-items:flex-end;margin:28px 0 24px 0"><div><div style="font-size:30px;font-weight:900;line-height:1.45">${cur.t}</div><div class="mu" style="font-size:16px">${cur.a} · 도시의 밤</div></div><button class="lk${liked?' on':''}" data-like style="color:#ff4d7d" aria-label="좋아요">${ic('heart',32)}</button></div>
+<div class="tk" data-seek style="height:5px"><i class="pf" style="width:${pos/D*100}%"></i></div><div class="mu sm" style="display:flex;justify-content:space-between;margin-top:8px"><span class="pt">${fmt(pos)}</span><span>3:48</span></div>
+<div class="ctr" style="justify-content:space-between;margin-top:32px;gap:0">${ic('shuffle',26)}${ic('prev',34)}<button class="pb" data-play style="width:76px;height:76px" aria-label="재생/일시정지">${ic(w,38)}</button>${ic('next',34)}<span class="blue">${ic('repeat',26)}</span></div></div>
+<div>${tabs(['다음 곡','가사'],'pn')}<div id="pn" style="margin-top:20px">${tb.pn?'<p class="mu" style="line-height:2.2;font-size:18px">♪ 가사 준비 중이에요<br>새벽 세 시의 도시를 걷는 동안<br>이 노래가 함께할게요</p>':[['coral','Rainy Mood','소담','3:44'],['mint','집중 모드','노을','4:10'],['sun','주말 드라이브','온도','3:05'],['violet','파란 우산','소담','3:12']].map((r,i)=>row(i+1,r[0],r[1],r[2],[],r[3],48)).join('')}</div></div></div>
+<div class="mu" style="display:flex;gap:10px;justify-content:center;font-weight:500;padding:8px 0">${ic('queue')}플레이리스트에 추가</div>`}
+function render(){const r=route(),on=r==='results'?'search':r;
+$('#nav').innerHTML=[['home','홈'],['search','검색'],['explore','탐색'],['library','보관함']].map(n=>`<a class="nv${n[0]===on?' on':''}" href="#${n[0]}">${ic(n[0])}<span>${n[1]}</span></a>`).join('');
+$('#pls').innerHTML='<p>내 플레이리스트</p>'+[['blue','출근길 아침'],['navy','새벽 감성'],['mint','공부할 때']].map(p=>`<div>${cv(p[0],36,8)}${p[1]}</div>`).join('');
+$('#sbi').innerHTML=ic('search');$('#mic').innerHTML=ic('mic');$('#sb').className='sb'+(r==='results'?' f':'');
+$('#q').value=r==='results'?q:'';$('#v').innerHTML=S[r]();if(r!==last){const m=$('#v');m.classList.remove('go');void m.offsetWidth;m.classList.add('go');m.scrollTop=0;last=r}$('#ft').innerHTML=bar();
+const p=$('#pl');if(p.classList.contains('open'))p.innerHTML=player()}
+const $=s=>document.querySelector(s);
+document.addEventListener('click',e=>{const t=e.target.closest('[data-tr],[data-play],[data-like],[data-open],[data-close],[data-q],[data-chip],[data-mood],[data-tab],[data-seek]');if(!t)return;
+if(t.dataset.tr){const[a,b,c]=t.dataset.tr.split('|');cur={t:a,a:b,g:c};pos=0;playing=true;render()}
+else if('play'in t.dataset){playing=!playing;render()}
+else if('like'in t.dataset){liked=!liked;render()}
+else if('open'in t.dataset){$('#pl').classList.add('open');render()}
+else if('close'in t.dataset){$('#pl').classList.remove('open')}
+else if('seek'in t.dataset){const b=t.getBoundingClientRect();pos=Math.max(0,Math.min(D,Math.round((e.clientX-b.left)/b.width*D)));tick(0)}
+else if(t.dataset.q){q=t.dataset.q;location.hash='results';render()}
+else if(t.dataset.chip){sit=+t.dataset.chip;render()}
+else if(t.dataset.mood){mood=+t.dataset.mood;render()}
+else if(t.dataset.tab){const[g,i]=t.dataset.tab.split(':');tb[g]=+i;render()}});
+function tick(d=1){if(d&&!playing)return;pos=pos+d>=D?0:pos+d;document.querySelectorAll('.pf').forEach(e=>e.style.width=pos/D*100+'%');document.querySelectorAll('.pt').forEach(e=>e.textContent=fmt(pos))}
+setInterval(tick,1000);
+$('#q').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim()){q=e.target.value.trim();location.hash='results';render()}});
+$('#q').addEventListener('focus',()=>{if(route()!=='results'&&route()!=='search')location.hash='search'});
+addEventListener('hashchange',render);render();
+</script></body></html>
